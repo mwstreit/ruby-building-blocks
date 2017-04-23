@@ -25,4 +25,17 @@ module Enumerable
       self
     end
   end
+
+  def my_all?
+    if !block_given?
+      my_each do |element|
+        return false unless element
+      end
+    else
+      my_each do |element|
+        return false unless yield(element)
+      end
+    end
+    true
+  end
 end
