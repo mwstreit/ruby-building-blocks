@@ -5,6 +5,7 @@ module Enumerable
     end
     self
   end
+  # End of my_each
 
   def my_each_with_index
     for element in self do
@@ -13,6 +14,7 @@ module Enumerable
     end
     self
   end
+  # End of my_each_with_index
 
   def my_select
     array = []
@@ -25,6 +27,7 @@ module Enumerable
       self
     end
   end
+  # End of my_select
 
   def my_all?
     if !block_given?
@@ -37,5 +40,19 @@ module Enumerable
       end
     end
     true
+  end
+  # End of my_all?
+
+  def my_any?
+    if !block_given?
+      my_each do |element|
+        return true if element
+      end
+    else
+      my_each do |element|
+        return true if yield(element)
+      end
+    end
+    false
   end
 end
