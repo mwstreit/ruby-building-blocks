@@ -86,12 +86,19 @@ module Enumerable
   end
   # End of my_count
 
-  def my_map
+  def my_map(proc = nil)
     result = []
-    return self unless block_given?
+    return self unless block_given? || !proc.nil?
+
     my_each do |element|
-      result << yield(element)
+      result <<
+        if proc.nil?
+          yield(element)
+        else
+          proc.call(element)
+        end
     end
+
     result
   end
   # End of my_map
@@ -113,6 +120,13 @@ module Enumerable
           memo.send(sym, element)
         end
     end
+
     memo
   end
+  # End of my_inject
+
+  def multiply_els
+    my_inject(:*)
+  end
+  # End of multiply_els
 end
