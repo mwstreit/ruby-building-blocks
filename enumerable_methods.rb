@@ -18,6 +18,7 @@ module Enumerable
 
   def my_select
     array = []
+
     if block_given?
       my_each do |element|
         array << element if yield(element)
