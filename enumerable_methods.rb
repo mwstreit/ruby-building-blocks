@@ -94,4 +94,25 @@ module Enumerable
     end
     result
   end
+  # End of my_map
+
+  def my_inject(initial = nil, sym = nil)
+    if initial.is_a?(Symbol) || initial.nil?
+      memo = first
+      sym = initial
+    else
+      memo = initial
+    end
+
+    my_each do |element|
+      next if element == memo
+      memo =
+        if block_given?
+          yield(memo, element)
+        else
+          memo.send(sym, element)
+        end
+    end
+    memo
+  end
 end
