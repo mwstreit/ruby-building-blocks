@@ -70,4 +70,18 @@ module Enumerable
     true
   end
   # End of my_none?
+
+  def my_count(*item)
+    count = 0
+    return size unless block_given?
+
+    my_each do |element|
+      if !item
+        count += 1 if yield(element)
+      elsif element == item
+        count += 1
+      end
+      count
+    end
+  end
 end
