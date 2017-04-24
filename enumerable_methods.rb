@@ -84,4 +84,14 @@ module Enumerable
       count
     end
   end
+  # End of my_count
+
+  def my_map
+    result = []
+    return self unless block_given?
+    my_each do |element|
+      result << yield(element)
+    end
+    result
+  end
 end
